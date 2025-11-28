@@ -100,3 +100,7 @@ const ExpenseTable = ({ expenses, onEdit, onDelete, isLoading }) => {
 
 export default ExpenseTable
 
+
+
+
+

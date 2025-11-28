@@ -6,17 +6,22 @@ import axiosInstance from './axiosInstance'
  * @returns {Promise} - Lista de gastos
  */
 export const getExpenses = async (filters = {}) => {
-  const params = new URLSearchParams()
-  
-  if (filters.category) params.append('category', filters.category)
-  if (filters.startDate) params.append('startDate', filters.startDate)
-  if (filters.endDate) params.append('endDate', filters.endDate)
-  
-  const queryString = params.toString()
-  const url = `/expenses${queryString ? `?${queryString}` : ''}`
-  
-  const response = await axiosInstance.get(url)
-  return response.data
+  try {
+    const params = new URLSearchParams()
+    
+    if (filters.category) params.append('category', filters.category)
+    if (filters.startDate) params.append('startDate', filters.startDate)
+    if (filters.endDate) params.append('endDate', filters.endDate)
+    
+    const queryString = params.toString()
+    const url = `/expenses${queryString ? `?${queryString}` : ''}`
+    
+    const response = await axiosInstance.get(url)
+    return response.data
+  } catch (error) {
+    // Re-lanzar el error para que React Query lo maneje
+    throw error
+  }
 }
 
 /**
@@ -59,4 +64,7 @@ export const deleteExpense = async (id) => {
   const response = await axiosInstance.delete(`/expenses/${id}`)
   return response.data
 }
+
+
+
 

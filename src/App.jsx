@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import { useAuthStore } from './store/authStore'
+import Home from './pages/Home'
+import About from './pages/About'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Dashboard from './pages/Dashboard'
@@ -16,6 +18,8 @@ function App() {
     <Router>
       <Routes>
         {/* Rutas públicas */}
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
         <Route 
           path="/login" 
           element={isAuth ? <Navigate to="/dashboard" replace /> : <Login />} 
@@ -25,19 +29,17 @@ function App() {
           element={isAuth ? <Navigate to="/dashboard" replace /> : <Register />} 
         />
 
-        {/* Rutas protegidas */}
+        {/* Rutas protegidas con Layout */}
         <Route
-          path="/"
           element={
             <ProtectedRoute>
               <Layout />
             </ProtectedRoute>
           }
         >
-          <Route index element={<Navigate to="/dashboard" replace />} />
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="expenses" element={<Expenses />} />
-          <Route path="categories" element={<Categories />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/expenses" element={<Expenses />} />
+          <Route path="/categories" element={<Categories />} />
         </Route>
 
         {/* 404 */}
@@ -48,4 +50,3 @@ function App() {
 }
 
 export default App
-

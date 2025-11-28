@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useCategories, useCreateCategory } from '../hooks/useCategories'
 import CategoryForm from '../components/CategoryForm'
+import { Plus } from 'lucide-react'
 
 const Categories = () => {
   const [showForm, setShowForm] = useState(false)
@@ -46,8 +47,9 @@ const Categories = () => {
           </p>
         </div>
         {!showForm && (
-          <button onClick={() => setShowForm(true)} className="btn-primary">
-            + Nueva Categoría
+          <button onClick={() => setShowForm(true)} className="btn-primary flex items-center space-x-2">
+            <Plus className="w-4 h-4" />
+            <span>Nueva Categoría</span>
           </button>
         )}
       </div>
@@ -125,4 +127,7 @@ const Categories = () => {
 }
 
 export default Categories
+
+
+
 

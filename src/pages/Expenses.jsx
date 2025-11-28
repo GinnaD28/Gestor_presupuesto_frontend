@@ -5,6 +5,7 @@ import ExpenseTable from '../components/ExpenseTable'
 import ExpenseForm from '../components/ExpenseForm'
 import { downloadExpensesPDF } from '../api/reports.api'
 import { formatDateInput } from '../utils/formatCurrency'
+import { Download, Plus } from 'lucide-react'
 
 const Expenses = () => {
   const [showModal, setShowModal] = useState(false)
@@ -109,11 +110,13 @@ const Expenses = () => {
           </p>
         </div>
         <div className="flex space-x-3">
-          <button onClick={handleDownloadPDF} className="btn-secondary">
-            📄 Descargar PDF
+          <button onClick={handleDownloadPDF} className="btn-secondary flex items-center space-x-2">
+            <Download className="w-4 h-4" />
+            <span>Descargar PDF</span>
           </button>
-          <button onClick={handleCreate} className="btn-primary">
-            + Nuevo Gasto
+          <button onClick={handleCreate} className="btn-primary flex items-center space-x-2">
+            <Plus className="w-4 h-4" />
+            <span>Nuevo Gasto</span>
           </button>
         </div>
       </div>

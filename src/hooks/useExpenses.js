@@ -11,6 +11,14 @@ export const useExpenses = (filters = {}) => {
   return useQuery({
     queryKey: ['expenses', filters],
     queryFn: () => getExpenses(filters),
+    retry: 1,
+    refetchOnWindowFocus: false,
+    onError: (error) => {
+      // Solo loguear errores que no sean 401 (ya se manejan en el interceptor)
+      if (error.response?.status !== 401) {
+        console.error('Error al obtener gastos:', error)
+      }
+    },
   })
 }
 
@@ -54,4 +62,7 @@ export const useDeleteExpense = () => {
     },
   })
 }
+
+
+
 

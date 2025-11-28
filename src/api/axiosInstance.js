@@ -29,11 +29,17 @@ axiosInstance.interceptors.response.use(
       // Token inválido o expirado
       localStorage.removeItem('token')
       localStorage.removeItem('user')
-      window.location.href = '/login'
+      // Usar setTimeout para evitar problemas con el ciclo de vida de React
+      setTimeout(() => {
+        window.location.href = '/login'
+      }, 100)
     }
     return Promise.reject(error)
   }
 )
 
 export default axiosInstance
+
+
+
 
